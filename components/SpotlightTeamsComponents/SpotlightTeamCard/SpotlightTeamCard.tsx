@@ -13,8 +13,8 @@ interface SpotlightTeamCardProps {
 
 const SpotlightTeamCard: React.FC<SpotlightTeamCardProps> = ({ image, teamName, date, day, time, address, buttonLabel, darkMode }) => {
     const cardClass = darkMode
-        ? "cursor-pointer p-4 rounded-md h-[500px] w-[195px] md:h-[625px] md:w-[230px] lg:h-[625px] lg:w-[257px] relative transition-transform duration-300 hover:scale-105 bg-[#3B3E47]"
-        : "cursor-pointer p-4 rounded-md h-[500px] w-[195px] md:h-[625px] md:w-[230px] lg:h-[625px] lg:w-[257px] relative transition-transform duration-300 hover:scale-105 bg-white";
+        ? "cursor-pointer p-4 rounded-md h-[500px] w-[195px] md:h-[600px] md:w-[215px] xl:h-[625px] xl:w-[257px] relative transition-transform duration-300 hover:scale-105 bg-[#3B3E47]"
+        : "cursor-pointer p-4 rounded-md h-[500px] w-[195px] md:h-[600px] md:w-[215px] xl:h-[625px] xl:w-[257px] relative transition-transform duration-300 hover:scale-105 bg-white";
 
     const shadowClass = "0px 12px 24px 0px #0000001A";
 
@@ -27,7 +27,7 @@ const SpotlightTeamCard: React.FC<SpotlightTeamCardProps> = ({ image, teamName, 
 
             {/* Image */}
             <div className="relative w-full h-[65%] overflow-hidden mb-4 shadow-xl">
-                <Image src={image} alt={teamName} layout="fill" objectFit="cover" className="object-cover object-center" />
+                <Image src={image} alt={teamName} fill={true} className="object-cover object-center" />
             </div>
 
             {/* Dashed Line */}

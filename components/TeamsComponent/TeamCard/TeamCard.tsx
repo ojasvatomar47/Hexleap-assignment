@@ -12,8 +12,8 @@ interface TeamCardProps {
 
 const TeamCard: React.FC<TeamCardProps> = ({ image, teamName, topEvents, sport, description, isAd = false, darkMode }) => {
     const cardClass = darkMode
-        ? "p-2 flex flex-col items-start justify-center w-[238.53px] h-[511px] text-white relative transition-transform duration-300 hover:scale-105 bg-gray-800"
-        : "p-2 flex flex-col items-start justify-center w-[238.53px] h-[511px] text-black relative transition-transform duration-300 hover:scale-105 bg-white";
+        ? "p-2 flex flex-col items-start justify-center text-white relative transition-transform duration-300 hover:scale-105 bg-gray-800 h-[400px] w-[195px] md:h-[500px] md:w-[160px] xl:h-[625px] xl:w-[257px]"
+        : "p-2 flex flex-col items-start justify-center text-black relative transition-transform duration-300 hover:scale-105 bg-white h-[400px] w-[195px] md:h-[500px] md:w-[160px] xl:h-[625px] xl:w-[257px]";
 
     const shadowClass = "0px 12px 24px 0px #0000001A";
 
@@ -25,13 +25,18 @@ const TeamCard: React.FC<TeamCardProps> = ({ image, teamName, topEvents, sport, 
                     <div className="absolute top-0 right-0 bg-black text-white px-2 py-1 rounded-tl-md rounded-bl-md rounded-br-md z-10">
                         Ad
                     </div>
-                    <Image src={image} alt={teamName} layout="fill" objectFit="cover" className="object-cover object-center w-full h-full" />
+                    <Image
+                        src={image}
+                        alt={teamName}
+                        fill={true}
+                        className="object-cover object-center"
+                    />
                 </div>
                 <div className="border-[1px] px-3 py-4 border-green-900">
-                    <h2 className="text-xl font-semibold mt-4">
+                    <h2 className="text-md xl:text-xl font-semibold mt-4">
                         {teamName}
                     </h2>
-                    <p className="text-sm mt-1">
+                    <p className="text-[11px] xl:text-[17px] mt-1">
                         {description}
                     </p>
                 </div>
@@ -42,7 +47,12 @@ const TeamCard: React.FC<TeamCardProps> = ({ image, teamName, topEvents, sport, 
     return (
         <div className={`${cardClass}`} style={{ boxShadow: shadowClass }}>
             <div className="relative w-full h-full overflow-hidden">
-                <Image src={image} alt={teamName} layout="fill" objectFit="cover" className="object-cover object-center w-full h-full" />
+                <Image
+                    src={image}
+                    alt={teamName}
+                    fill={true}
+                    className="object-cover object-center"
+                />
             </div>
             <h2 className="text-lg font-semibold mt-4">
                 {teamName}

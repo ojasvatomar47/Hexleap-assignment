@@ -1,4 +1,3 @@
-// SpotlightSection.tsx
 import SpotlightTeamCard from "@/components/SpotlightTeamsComponents/SpotlightTeamCard/SpotlightTeamCard";
 import { SPOTLIGHT_TEAMS } from "@/constants/spotlightTeams";
 

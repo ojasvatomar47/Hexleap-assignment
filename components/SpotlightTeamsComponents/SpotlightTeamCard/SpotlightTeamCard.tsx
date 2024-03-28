@@ -37,7 +37,7 @@ const SpotlightTeamCard: React.FC<SpotlightTeamCardProps> = ({ image, teamName, 
             <h2 className="text-sm md:text-lg font-semibold text-center mb-2 md:h-14">{teamName}</h2>
 
             {/* Date, Day, Time */}
-            <p className={`text-[10px] md:text-sm text-center mb-2 ${darkMode ? 'text-gray-300' : 'text-black'}`}>{date} | {day} | {time}</p>
+            <p className={`font-sans text-[10px] md:text-sm text-center mb-2 ${darkMode ? 'text-gray-300' : 'text-black'}`}>{date} | {day} | {time}</p>
 
             {/* Address */}
             <p className={`text-[10px] md:text-xs text-center ${darkMode ? 'text-[#DFDFDF]' : 'text-[#525965]'} mb-4 px-3`}>{address}</p>

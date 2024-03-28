@@ -36,7 +36,7 @@ const TeamCard: React.FC<TeamCardProps> = ({ image, teamName, topEvents, sport, 
                     <h2 className="text-md xl:text-xl font-semibold mt-4">
                         {teamName}
                     </h2>
-                    <p className="text-[11px] xl:text-[17px] mt-1">
+                    <p className={`text-[11px] xl:text-[17px] mt-1 ${darkMode ? 'text-[#DFDFDF]' : 'text-[#525965]'}`}>
                         {description}
                     </p>
                 </div>
@@ -59,19 +59,19 @@ const TeamCard: React.FC<TeamCardProps> = ({ image, teamName, topEvents, sport, 
             </h2>
             <div className={`${darkMode ? 'bg-[#292B32]' : 'bg-gray-100'} mt-4 p-2 rounded-sm w-full`}>
                 <div className="grid grid-cols-2 gap-4">
-                    <div className="flex flex-col">
-                        <span className={`text-xs font-semibold ${darkMode ? 'text-[#DFDFDF]' : 'text-[#525965]'}`}>
+                    <div className="flex flex-col gap-1">
+                        <span className={`text-xs xl:text-[15px] font-semibold ${darkMode ? 'text-[#DFDFDF]' : 'text-[#525965]'}`}>
                             Total Events
                         </span>
-                        <span className="text-xs font-bold">
+                        <span className="text-xs xl:text-[15px] font-bold">
                             {topEvents}
                         </span>
                     </div>
-                    <div className="flex flex-col">
-                        <span className={`text-xs font-semibold ${darkMode ? 'text-[#DFDFDF]' : 'text-[#525965]'}`}>
+                    <div className="flex flex-col gap-1">
+                        <span className={`text-xs xl:text-[15px] font-semibold ${darkMode ? 'text-[#DFDFDF]' : 'text-[#525965]'}`}>
                             Sport
                         </span>
-                        <span className="text-xs font-bold">
+                        <span className="text-xs xl:text-[15px] font-bold">
                             {sport}
                         </span>
                     </div>

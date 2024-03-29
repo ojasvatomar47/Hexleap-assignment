@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import TeamCard from "@/components/TeamsComponent/TeamCard/TeamCard";
 import { TEAMS } from "@/constants/teams";
 
@@ -6,6 +7,26 @@ interface TeamsSectionProps {
 }
 
 const TeamsSection: React.FC<TeamsSectionProps> = ({ darkMode }) => {
+    const [visibleTeams, setVisibleTeams] = useState(5);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleSeeMore = () => {
+
+        setIsLoading(true);
+
+        setTimeout(() => {
+            const nextVisibleTeams = visibleTeams + 3;
+            setVisibleTeams(nextVisibleTeams);
+
+            if (nextVisibleTeams >= TEAMS.length) {
+                setIsButtonDisabled(true);
+            }
+
+            setIsLoading(false);
+        }, 200);
+    };
+
     return (
         <section>
             <div className="mb-7">
@@ -17,7 +38,7 @@ const TeamsSection: React.FC<TeamsSectionProps> = ({ darkMode }) => {
 
             <div className="flex justify-center items-center">
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-y-3 md:gap-x-2">
-                    {TEAMS.map((team, index) => (
+                    {TEAMS.slice(0, visibleTeams).map((team, index) => (
                         <TeamCard
                             key={index}
                             image={team.image}
@@ -33,8 +54,12 @@ const TeamsSection: React.FC<TeamsSectionProps> = ({ darkMode }) => {
             </div>
 
             <div className="flex justify-center mt-8">
-                <button className={`text-sm md:text-md xl:text-lg px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-300`}>
-                    See More
+                <button
+                    className={`text-sm md:text-md xl:text-lg px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-300 ${isButtonDisabled || isLoading ? 'opacity-50 pointer-events-none' : ''}`}
+                    onClick={handleSeeMore}
+                    disabled={isButtonDisabled || isLoading}
+                >
+                    {isLoading ? 'Loading...' : 'See More'}
                 </button>
             </div>
         </section>

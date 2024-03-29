@@ -4,11 +4,12 @@ import { SPOTLIGHT_TEAMS } from "@/constants/spotlightTeams";
 interface SpotlightSectionProps {
     darkMode: boolean;
     activeCardIndex: number;
+    cardVisible: boolean;
     handleNextClick: () => void;
     handlePrevClick: () => void;
 }
 
-const SpotlightSection: React.FC<SpotlightSectionProps> = ({ darkMode, activeCardIndex, handleNextClick, handlePrevClick }) => {
+const SpotlightSection: React.FC<SpotlightSectionProps> = ({ darkMode, activeCardIndex, handleNextClick, handlePrevClick, cardVisible }) => {
     return (
         <section className={`flex flex-col px-4 md:px-6 items-center justify-center relative ${darkMode ? 'bg-gradient-to-b from-[#18282A] to-[#221A2C]' : 'bg-gradient-to-b from-purple-100 to-blue-100'} pb-7`}>
             <div className="text-center mt-8 md:mt-12 mb-4 flex flex-col items-center justify-center gap-4 md:gap-6">
@@ -20,25 +21,27 @@ const SpotlightSection: React.FC<SpotlightSectionProps> = ({ darkMode, activeCar
 
             <div className="flex items-center justify-center w-full relative">
                 <button
-                    className={`hidden lg:block p-1 md:p-2 text-xl md:text-2xl border-2 border-blue-400 text-blue-400 hover:text-white hover:bg-blue-400 font-bold transition-colors duration-300`}
+                    className={`p-1 md:p-2 text-xl md:text-2xl border-2 border-blue-400 text-blue-400 hover:text-white hover:bg-blue-400 font-bold transition-colors duration-300`}
                     style={{ flex: '0 0 8%' }}
                     onClick={handlePrevClick}
                 >
                     &lt;
                 </button>
 
-                <div className="flex-1 flex justify-center items-center">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-2 md:gap-y-3 gap-x-4 relative" style={{ transform: `translateX(-${activeCardIndex * (100 / SPOTLIGHT_TEAMS.length)}%)` }}>
-                        {SPOTLIGHT_TEAMS.map((team, index) => (
-                            <div key={index} className="flex-none w-full md:w-1/3 px-1">
-                                <SpotlightTeamCard {...team} darkMode={darkMode} />
-                            </div>
-                        ))}
+                <div className="flex-1 flex justify-center items-center gap-3">
+                    <div className={`hidden lg:block ${cardVisible ? 'opacity-0 transition-opacity duration-300 ease-in-out' : 'opacity-100 transition-opacity duration-300 ease-in-out'}`}>
+                        <SpotlightTeamCard {...SPOTLIGHT_TEAMS[(activeCardIndex - 1) < 0 ? SPOTLIGHT_TEAMS.length - 1 : activeCardIndex - 1]} darkMode={darkMode} />
+                    </div>
+                    <div className={`${cardVisible ? 'opacity-0 transition-opacity duration-300 ease-in-out' : 'opacity-100 transition-opacity duration-300 ease-in-out'}`}>
+                        <SpotlightTeamCard {...SPOTLIGHT_TEAMS[activeCardIndex]} darkMode={darkMode} />
+                    </div>
+                    <div className={`hidden md:block ${cardVisible ? 'opacity-0 transition-opacity duration-300 ease-in-out' : 'opacity-100 transition-opacity duration-300 ease-in-out'}`}>
+                        <SpotlightTeamCard {...SPOTLIGHT_TEAMS[(activeCardIndex + 1) % SPOTLIGHT_TEAMS.length]} darkMode={darkMode} />
                     </div>
                 </div>
 
                 <button
-                    className={`hidden lg:block p-1 md:p-2 text-xl md:text-2xl border-2 border-blue-400 text-blue-400 hover:text-white hover:bg-blue-400 font-bold transition-colors duration-300`}
+                    className={`p-1 md:p-2 text-xl md:text-2xl border-2 border-blue-400 text-blue-400 hover:text-white hover:bg-blue-400 font-bold transition-colors duration-300`}
                     style={{ flex: '0 0 8%' }}
                     onClick={handleNextClick}
                 >

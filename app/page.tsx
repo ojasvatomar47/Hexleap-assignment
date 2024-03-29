@@ -7,7 +7,7 @@ import { getLocalStorageItem, setLocalStorageItem } from "@/utils/localStorage";
 import { SPOTLIGHT_TEAMS } from "@/constants/spotlightTeams";
 
 export default function Home() {
-  const [activeCardIndex, setActiveCardIndex] = useState(0);
+
   const [darkMode, setDarkMode] = useState(false);
 
   // Loads dark mode state from localStorage
@@ -19,12 +19,29 @@ export default function Home() {
     }
   }, []);
 
-  const handleNextClick = () => {
-    // setActiveCardIndex((prevIndex) => (prevIndex + 1) % SPOTLIGHT_TEAMS.length);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [cardVisible, setCardVisible] = useState(false);
+
+  const nextSlide = () => {
+    setCardVisible(true)
+
+    setTimeout(() => {
+      setActiveIndex((prevIndex) =>
+        prevIndex === SPOTLIGHT_TEAMS.length - 1 ? 0 : prevIndex + 1
+      );
+      setCardVisible(false);
+    }, 300);
   };
 
-  const handlePrevClick = () => {
-    // setActiveCardIndex((prevIndex) => (prevIndex - 1 + SPOTLIGHT_TEAMS.length) % SPOTLIGHT_TEAMS.length);
+  const prevSlide = () => {
+    setCardVisible(true)
+
+    setTimeout(() => {
+      setActiveIndex((prevIndex) =>
+        prevIndex === 0 ? SPOTLIGHT_TEAMS.length - 1 : prevIndex - 1
+      );
+      setCardVisible(false);
+    }, 300);
   };
 
   const toggleDarkMode = () => {
@@ -43,7 +60,7 @@ export default function Home() {
       </button>
 
       <TeamsSection darkMode={darkMode} />
-      <SpotlightSection darkMode={darkMode} activeCardIndex={activeCardIndex} handleNextClick={handleNextClick} handlePrevClick={handlePrevClick} />
+      <SpotlightSection darkMode={darkMode} activeCardIndex={activeIndex} handleNextClick={nextSlide} handlePrevClick={prevSlide} cardVisible={cardVisible} />
     </main>
   );
 }

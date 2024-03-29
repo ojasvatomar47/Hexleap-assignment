@@ -1,10 +1,10 @@
 "use client"
-
 import { useEffect, useState } from "react";
 import TeamsSection from "@/components/TeamsComponent/TeamsComponent";
 import SpotlightSection from "@/components/SpotlightTeamsComponents/SpotlightTeamsComponent";
 import { getLocalStorageItem, setLocalStorageItem } from "@/utils/localStorage";
 import { SPOTLIGHT_TEAMS } from "@/constants/spotlightTeams";
+import { BiSun, BiMoon } from 'react-icons/bi'; // Importing icons
 
 export default function Home() {
 
@@ -22,7 +22,7 @@ export default function Home() {
   const [cardVisible, setCardVisible] = useState(false);
 
   const nextSlide = () => {
-    setCardVisible(true)
+    setCardVisible(true);
 
     setTimeout(() => {
       setActiveIndex((prevIndex) =>
@@ -33,7 +33,7 @@ export default function Home() {
   };
 
   const prevSlide = () => {
-    setCardVisible(true)
+    setCardVisible(true);
 
     setTimeout(() => {
       setActiveIndex((prevIndex) =>
@@ -52,11 +52,21 @@ export default function Home() {
 
   return (
     <main className={`flex flex-col gap-10 px-4 md:px-8 lg:px-16 py-6 md:py-10 ${darkMode ? 'bg-black text-white' : 'bg-[#F7F7F8] text-black'}`}>
-      
+
       {/* Toggle Dark Mode Button */}
-      <button className="text-[12px] md:text-md xl:text-lg font-semibold absolute top-4 right-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-300" onClick={toggleDarkMode}>
-        {darkMode ? 'Light Mode' : 'Dark Mode'}
+      <button
+        className={`flex items-center text-2xl md:text-lg lg:text-xl font-bold absolute top-4 right-4 px-4 py-2 ${darkMode ? 'bg-black text-white hover:bg-gray-700' : 'bg-[#F7F7F8] text-black hover:bg-gray-300'} rounded-tr-lg rounded-bl-lg md:border-2 border-gray-400 transition-colors duration-300`}
+        onClick={toggleDarkMode}
+      >
+        <span className="hidden md:block">
+          {darkMode ? 'Light Mode' : 'Dark Mode'}
+        </span>
+        <span className="md:ml-2">
+          {darkMode ? <BiSun /> : <BiMoon />}
+        </span>
       </button>
+
+
 
       <TeamsSection darkMode={darkMode} />
       <SpotlightSection darkMode={darkMode} activeCardIndex={activeIndex} handleNextClick={nextSlide} handlePrevClick={prevSlide} cardVisible={cardVisible} />

@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from 'react';
 import TeamCard from "@/components/TeamsComponent/TeamCard/TeamCard";
 import { TEAMS } from "@/constants/teams";
@@ -10,20 +12,24 @@ const TeamsSection: React.FC<TeamsSectionProps> = ({ darkMode }) => {
     const [visibleTeams, setVisibleTeams] = useState(5);
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [showAllTeams, setShowAllTeams] = useState(false);
 
     const handleSeeMore = () => {
-
         setIsLoading(true);
 
         setTimeout(() => {
-            const nextVisibleTeams = visibleTeams + 3;
-            setVisibleTeams(nextVisibleTeams);
-
-            if (nextVisibleTeams >= TEAMS.length) {
-                setIsButtonDisabled(true);
+            if (showAllTeams) {
+                setVisibleTeams(5);
+                setShowAllTeams(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                setVisibleTeams(TEAMS.length);
+                setShowAllTeams(true);
             }
 
+            setIsButtonDisabled(false);
             setIsLoading(false);
+
         }, 200);
     };
 
@@ -57,9 +63,9 @@ const TeamsSection: React.FC<TeamsSectionProps> = ({ darkMode }) => {
                 <button
                     className={`text-sm md:text-md xl:text-lg px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-300 ${isButtonDisabled || isLoading ? 'opacity-50 pointer-events-none' : ''}`}
                     onClick={handleSeeMore}
-                    disabled={isButtonDisabled || isLoading}
+                    disabled={isLoading}
                 >
-                    {isLoading ? 'Loading...' : 'See More'}
+                    {isLoading ? 'Loading...' : showAllTeams ? 'See Less' : 'See More'}
                 </button>
             </div>
         </section>
